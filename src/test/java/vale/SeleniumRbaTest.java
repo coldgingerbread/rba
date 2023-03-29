@@ -1,6 +1,7 @@
 package vale;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -24,24 +25,29 @@ public class SeleniumRbaTest {
 	}
 
 	@Test
-	public void firstTest() {
+	public void firstTest() throws InterruptedException {
 		driver.get("http://www.rba.hr/");
 		driver.findElement(By.linkText("Tečajni kalkulator")).click();
-		Select dropdownFrom=new Select(driver.findElement(By.id("val1")));
+		Select dropdownFrom = new Select(driver.findElement(By.id("val1")));
 		dropdownFrom.selectByValue("978");
-		Select dropdownTo=new Select(driver.findElement(By.id("val2")));
+		Select dropdownTo = new Select(driver.findElement(By.id("val2")));
 		dropdownTo.selectByValue("826");
-		Select dropdownType=new Select(driver.findElement(By.id("kurs")));
+		Select dropdownType = new Select(driver.findElement(By.id("kurs")));
 		dropdownType.selectByVisibleText("Kupovni");
 		driver.findElement(By.id("suma1")).clear();
 		driver.findElement(By.id("suma1")).sendKeys(Keys.BACK_SPACE);
 		driver.findElement(By.id("suma1")).sendKeys("40.00");
+		Thread.sleep(2000L);
+		String textExchange = driver.findElement(By.id("rateExch")).getText();
+		String textAmount = driver.findElement(By.id("toHouseExch")).getText().replace("=", "dobijem");
+		System.out.println("tečaj je " + textExchange + ", za " + textAmount);
+
 	}
-	
+
 	@AfterTest
 	public void tearDown() {
-		//driver.close();
-		//driver.quit();
+		// driver.close();
+		// driver.quit();
 	}
 
 }
