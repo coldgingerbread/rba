@@ -24,7 +24,7 @@ public class SeleniumRbaTest {
 	@Test
 	public void firstTest() {
 		driver.get("http://www.rba.hr/");
-		driver.findElement(By.cssSelector("#tools > ul > li:nth-child(2) > a")).click();
+		driver.findElement(By.linkText("Tečajni kalkulator")).click();
 	}
 	
 	@AfterTest
