@@ -3,8 +3,10 @@ package vale;
 import java.io.File;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -25,6 +27,15 @@ public class SeleniumRbaTest {
 	public void firstTest() {
 		driver.get("http://www.rba.hr/");
 		driver.findElement(By.linkText("Tečajni kalkulator")).click();
+		Select dropdownFrom=new Select(driver.findElement(By.id("val1")));
+		dropdownFrom.selectByValue("978");
+		Select dropdownTo=new Select(driver.findElement(By.id("val2")));
+		dropdownTo.selectByValue("826");
+		Select dropdownType=new Select(driver.findElement(By.id("kurs")));
+		dropdownType.selectByVisibleText("Kupovni");
+		driver.findElement(By.id("suma1")).clear();
+		driver.findElement(By.id("suma1")).sendKeys(Keys.BACK_SPACE);
+		driver.findElement(By.id("suma1")).sendKeys("40.00");
 	}
 	
 	@AfterTest
